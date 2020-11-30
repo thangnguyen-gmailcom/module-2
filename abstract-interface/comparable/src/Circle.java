@@ -1,5 +1,11 @@
-public class Circle extends Shape {
-    private double radius = 3.5 ;
+public class Circle extends Shape{
+    private double radius;
+
+    public Circle() {}
+
+    public Circle(double radius) {
+        this.radius = radius;
+    }
 
     public Circle(String color, boolean filled, double radius) {
         super(color, filled);
@@ -12,10 +18,6 @@ public class Circle extends Shape {
 
     public void setRadius(double radius) {
         this.radius = radius;
-    }
-
-    public double getArea() {
-        return Math.pow(radius,2) * Math.PI;
     }
 
     @Override

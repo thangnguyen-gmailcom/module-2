@@ -1,9 +1,9 @@
-public class Rectangle extends Shape {
-    private double width = 5;
-    private double length = 7;
+public class Rectangle implements Resizeable {
 
-    public Rectangle(String color, boolean filled, double width, double length) {
-        super(color, filled);
+    private double width;
+    private double length;
+
+    public Rectangle(double width, double length) {
         this.width = width;
         this.length = length;
     }
@@ -24,8 +24,12 @@ public class Rectangle extends Shape {
         this.length = length;
     }
 
-    public double getArea() {
+    public double getArea(){
         return width * length;
+    }
+
+    public double getPerimeter() {
+        return (width + length) * 2;
     }
 
     @Override
@@ -34,5 +38,11 @@ public class Rectangle extends Shape {
                 "width=" + width +
                 ", length=" + length +
                 '}';
+    }
+
+    @Override
+    public void resize(double percent) {
+        width *= (100 + percent )/100;
+        length *= (100 + percent) / 100;
     }
 }
