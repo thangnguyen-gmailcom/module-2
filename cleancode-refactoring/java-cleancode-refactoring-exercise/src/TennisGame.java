@@ -1,33 +1,16 @@
 public class TennisGame {
-
-    public static String getScore(String player1Name, String player2Name, int m_score1, int m_score2) {
+    private static int player1Score;
+    private static int player2Score;
+    public static String getScore(String player1Name, String player2Name, int _player1Score, int _player2Score) {
+        updatePlayerScores(_player1Score, _player2Score);
+        if (isDraw())
+            return getDrawScore();
         String score = "";
-        int tempScore=0;
-        if (m_score1==m_score2)
+        final int LOVE_SCORE = 0;
+        int tempScore= LOVE_SCORE;
+        if (isWin())
         {
-            switch (m_score1)
-            {
-                case 0:
-                    score = "Love-All";
-                    break;
-                case 1:
-                    score = "Fifteen-All";
-                    break;
-                case 2:
-                    score = "Thirty-All";
-                    break;
-                case 3:
-                    score = "Forty-All";
-                    break;
-                default:
-                    score = "Deuce";
-                    break;
-
-            }
-        }
-        else if (m_score1>=4 || m_score2>=4)
-        {
-            int minusResult = m_score1-m_score2;
+            int minusResult = player1Score-player2Score;
             if (minusResult==1) score ="Advantage player1";
             else if (minusResult ==-1) score ="Advantage player2";
             else if (minusResult>=2) score = "Win for player1";
@@ -37,14 +20,14 @@ public class TennisGame {
         {
             for (int i=1; i<3; i++)
             {
-                if (i==1) tempScore = m_score1;
-                else { score+="-"; tempScore = m_score2;}
+                if (i==1) tempScore = player1Score;
+                else { score+="-"; tempScore = player2Score;}
                 switch(tempScore)
                 {
-                    case 0:
+                    case LOVE_SCORE:
                         score+="Love";
                         break;
-                    case 1:
+                    case 1: 
                         score+="Fifteen";
                         break;
                     case 2:
@@ -57,5 +40,30 @@ public class TennisGame {
             }
         }
         return score;
+    }
+    private static void updatePlayerScores(int _player1Score, int _player2Score) {
+        player1Score = _player1Score;
+        player2Score = _player2Score;
+    }
+    private static boolean isWin() {
+        return player1Score >= 4 || player2Score >= 4;
+    }
+    private static String getDrawScore() {
+        switch (player1Score)
+        {
+            case 0:
+                return  "Love-All";
+            case 1:
+                return "Fifteen-All";
+            case 2:
+                return "Thirty-All";
+            case 3:
+                return "Forty-All";
+            default:
+                return "Deuce";
+        }
+    }
+    private static boolean isDraw() {
+        return player1Score == player2Score;
     }
 }
