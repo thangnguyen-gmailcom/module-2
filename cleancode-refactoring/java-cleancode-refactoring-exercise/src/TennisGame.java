@@ -5,41 +5,41 @@ public class TennisGame {
         updatePlayerScores(_player1Score, _player2Score);
         if (isDraw())
             return getDrawScore();
-        String score = "";
+        StringBuilder score = new StringBuilder();
         final int LOVE_SCORE = 0;
         int tempScore= LOVE_SCORE;
         if (isWin())
         {
             int minusResult = player1Score-player2Score;
-            if (minusResult==1) score ="Advantage player1";
-            else if (minusResult ==-1) score ="Advantage player2";
-            else if (minusResult>=2) score = "Win for player1";
-            else score ="Win for player2";
+            if (minusResult==1) score = new StringBuilder("Advantage player1");
+            else if (minusResult ==-1) score = new StringBuilder("Advantage player2");
+            else if (minusResult>=2) score = new StringBuilder("Win for player1");
+            else score = new StringBuilder("Win for player2");
         }
         else
         {
             for (int i=1; i<3; i++)
             {
                 if (i==1) tempScore = player1Score;
-                else { score+="-"; tempScore = player2Score;}
+                else { score.append("-"); tempScore = player2Score;}
                 switch(tempScore)
                 {
                     case LOVE_SCORE:
-                        score+="Love";
+                        score.append("Love");
                         break;
                     case 1: 
-                        score+="Fifteen";
+                        score.append("Fifteen");
                         break;
                     case 2:
-                        score+="Thirty";
+                        score.append("Thirty");
                         break;
                     case 3:
-                        score+="Forty";
+                        score.append("Forty");
                         break;
                 }
             }
         }
-        return score;
+        return score.toString();
     }
     private static void updatePlayerScores(int _player1Score, int _player2Score) {
         player1Score = _player1Score;
