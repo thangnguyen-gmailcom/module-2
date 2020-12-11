@@ -1,9 +1,18 @@
-public class Product {
+import java.util.Comparator;
+import java.util.Properties;
+
+public class Product implements Comparable<Product> {
     private int id;
     private String productName;
     private String dateOfManufacture;
     private String expiryDate;
     private int price;
+
+    public Product(){}
+
+    public Product(int price) {
+        this.price = price;
+    }
 
     public Product(int id, String productName, String dateOfManufacture, String expiryDate, int price) {
         this.id = id;
@@ -58,5 +67,10 @@ public class Product {
                 ", expiryDate='" + expiryDate + '\'' +
                 ", price=" + price +
                 '}';
+    }
+
+    @Override
+    public int compareTo(Product o) {
+        return price - o.getPrice();
     }
 }

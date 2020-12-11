@@ -1,7 +1,7 @@
-import java.util.Properties;
-import java.util.Scanner;
+import java.util.*;
 
 public class Main {
+
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         int chiceNumber;
@@ -36,6 +36,9 @@ public class Main {
                 case 5 :
                     showProductByName();
                     break;
+                case 6 :
+                    sortProductByPrice();
+                    break;
                 case 7:
                     System.out.println("Tạm biệt");
                     System.exit(7);
@@ -45,27 +48,20 @@ public class Main {
     }
 
     public static void addProduct() {
-        Scanner sc = new Scanner(System.in);
-        String productName = sc.nextLine();
-        String dateOfManufacture = sc.nextLine();
-        String expiryDate = sc.nextLine();
-        int price = sc.nextInt();
-        sc.nextLine();
+        String productName = scannerString("Nhập tên sản phẩm :");
+        String dateOfManufacture = scannerString("Ngày sản xuất : ");
+        String expiryDate = scannerString("Hạn sử dụng :");
+        int price = scannerInteger("Nhập giá:");
         ProductManager.addProduct(productName,dateOfManufacture,expiryDate,price);
     }
 
     public static void getProduct() {
-        Scanner sc = new Scanner(System.in);
-        System.out.println("Nhap id :");
-        int id = sc.nextInt();
-        sc.nextLine();
-        System.out.println("Nhap ten san pham");
+        int id = scannerInteger("Nhap id");
         Product product = ProductManager.getProductById(id);
-        String productName1 = sc.nextLine();
-        String dateOfManufacture1 = sc.nextLine();
-        String expiryDate1 = sc.nextLine();
-        int price1 = sc.nextInt();
-        sc.nextLine();
+        String productName1 = scannerString("nhập tên sản phẩm");
+        String dateOfManufacture1 = scannerString("Ngày sản xuất");
+        String expiryDate1 = scannerString("Hạn sử dụng");
+        int price1 = scannerInteger("giá");
         product.setProductName(productName1);
         product.setDateOfManufacture(dateOfManufacture1);
         product.setExpiryDate(expiryDate1);
@@ -73,10 +69,7 @@ public class Main {
     }
 
     public static void removeProduct(){
-        Scanner sc = new Scanner(System.in);
-        System.out.println("Nhập id :");
-        int id = sc.nextInt();
-        sc.nextLine();
+        int id = scannerInteger("nhập id :");
         ProductManager.removeProduct(id);
     }
 
@@ -84,9 +77,27 @@ public class Main {
         ProductManager.showProduct();
     }
     public static void showProductByName(){
-        Scanner sc = new Scanner(System.in);
-        System.out.println("Nhap ten san pham");
-        String name = sc.nextLine();
+        String name = scannerString("Nhập tên sản phẩm : ");
         ProductManager.showProductByName(name);
+    }
+
+    public static void sortProductByPrice() {
+        Collections.sort(ProductManager.products);
+        show();
+    }
+
+    public static String scannerString(String message){
+        Scanner sc = new Scanner(System.in);
+        System.out.println(message);
+        String st = sc.nextLine();
+        return st;
+    }
+
+    public static int scannerInteger(String message) {
+        Scanner sc = new Scanner(System.in);
+        System.out.println(message);
+        int st = sc.nextInt();
+        sc.nextLine();
+        return st;
     }
 }

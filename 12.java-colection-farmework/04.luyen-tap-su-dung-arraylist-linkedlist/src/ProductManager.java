@@ -1,8 +1,8 @@
 import java.util.ArrayList;
 import java.util.Comparator;
 
-public class ProductManager implements Comparator<Product> {
-    private static final ArrayList<Product> products = new ArrayList<>();
+public class ProductManager {
+    public static final ArrayList<Product> products = new ArrayList<>();
     private static int id = 0;
 
     public static void addProduct(String name, String dateOfManufacture, String expiryDate, int price){
@@ -34,18 +34,9 @@ public class ProductManager implements Comparator<Product> {
         for (Product product : products){
             if(product.getProductName().equals(name)){
                 System.out.println(product);
-                return;
             }
         }
     }
 
-    public int compare(Product product1, Product product2){
-        if(product1.getPrice() > product2.getPrice()) {
-            return 1;
-        }else if (product1.getPrice() == product2.getPrice()){
-            return 0;
-        }else {
-            return -1;
-        }
-    }
+
 }
