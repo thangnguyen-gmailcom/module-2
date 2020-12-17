@@ -112,4 +112,23 @@ public class BinarySearchTree<E extends Comparable<E>> {
     public int getSize(){
         return size;
     }
+
+    public boolean search(E element){
+        if (isEmpty()){
+            return false;
+        }else {
+            TreeNode<E> current = root;
+            while (current != null){
+                if(current.element.equals(element)){
+                    return true;
+                }
+                if(goRight(element,current.element)){
+                    current = current.right;
+                }else {
+                    current = current.left;
+                }
+            }
+            return false;
+        }
+    }
 }
