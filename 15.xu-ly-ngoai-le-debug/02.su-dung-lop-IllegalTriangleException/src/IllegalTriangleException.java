@@ -1,5 +1,5 @@
 public class IllegalTriangleException extends Exception {
-    public IllegalTriangleException(String message){
-        super(message);
+    public IllegalTriangleException(String facebook){
+        super(facebook);
     }
 }
